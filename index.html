@@ -7,7 +7,7 @@
     <title>[VFU] 乗り物研究会 Official</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Montserrat:wght@600;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -15,6 +15,7 @@
             --main-color: #4b2d71; 
             --car-color: #ae2631; 
             --train-color: #274a78; 
+            --recruit-color: #d4a017; 
             --accent-yellow: #ffcc00; 
             --line-color: #06C755; 
             --bg-gradient: linear-gradient(-45deg, #2d1933, #4b2d71, #6b4095, #3a243b);
@@ -31,8 +32,7 @@
         * { box-sizing: border-box; }
 
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             font-family: 'Noto Serif JP', serif;
             color: var(--text-color);
             background: var(--bg-gradient);
@@ -42,114 +42,72 @@
             overflow-x: hidden;
         }
 
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        @keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
         .overlay { min-height: 100vh; background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(5px); padding: 20px 10px 60px 10px; position: relative; }
         .wrapper { max-width: 800px; margin: 0 auto; }
 
-        /* グローバルツールのレイアウト */
-        .global-tools { 
-            display: flex; 
-            justify-content: flex-start; 
-            align-items: center; 
-            margin-bottom: 20px; 
-            flex-wrap: wrap; 
-            gap: 10px; 
-        }
-
-        /* 代表紹介ボタンの設定 */
-        .admin-intro-btn {
-            background: var(--accent-yellow);
-            color: #333;
-            padding: 8px 15px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.8rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: 0.3s;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin-left: auto; 
-            margin-right: 10px; 
-        }
-        .admin-intro-btn:hover {
-            transform: scale(1.05);
-            filter: brightness(1.1);
-        }
-
         .ticker-container {
-            width: 100%;
-            margin-bottom: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 4px;
-            border: 1px solid #555;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            width: 100%; margin-bottom: 25px; background: rgba(0, 0, 0, 0.9); border-radius: 4px; border: 3px solid #ffffff; 
+            overflow: hidden; box-shadow: 0 0 15px rgba(255, 255, 255, 0.3), 0 4px 20px rgba(0,0,0,0.5); 
         }
-        .news-ticker { padding: 15px 0; color: var(--accent-yellow); font-family: 'Courier New', monospace; white-space: nowrap; }
+        .news-ticker { padding: 12px 0; color: var(--accent-yellow); font-family: 'Courier New', monospace; white-space: nowrap; }
         .news-ticker span { display: inline-block; padding-left: 100%; animation: ticker 25s linear infinite; font-weight: bold; font-size: 1.1rem; }
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-        .container { background: var(--container-bg); padding: 30px 20px; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); animation: fadeInUp 0.8s forwards; }
+        .container { 
+            background: var(--container-bg); padding: 30px 20px; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
+            animation: fadeInUp 0.8s forwards; position: relative; overflow: hidden; z-index: 1;
+        }
+
         @keyframes fadeInUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        header { text-align: center; margin-bottom: 30px; border-bottom: 1px solid #ddd; padding-bottom: 20px; }
-        h2 { font-size: clamp(1.4rem, 6vw, 2.2rem); color: var(--main-color); margin: 0; line-height: 1.3; }
+        header { text-align: center; margin-bottom: 30px; border-bottom: 1px solid #ddd; padding-bottom: 20px; position: relative; z-index: 2; }
         
-        .nav-buttons { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; align-items: center; }
-        .bbs-announce { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 500px; padding: 12px 15px; color: #fff; border-radius: 8px; text-decoration: none; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .btn-car { background: var(--car-color); }
-        .btn-train { background: var(--train-color); }
-        .btn-recruit { background: linear-gradient(90deg, #ae2631, #8b1c26); border: 2px solid var(--accent-yellow); }
-        .bbs-announce:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
+        h2 { 
+            font-size: clamp(1.4rem, 6vw, 2.2rem); 
+            color: var(--main-color); 
+            margin: 0; 
+            line-height: 1.3;
+            /* 白い縁取りを維持 */
+            text-shadow: 2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 2px 0 0 #fff, -2px 0 0 #fff;
+        }
         
-        .btn-main-text { font-weight: bold; font-size: 1rem; margin-bottom: 4px; }
-        .btn-sub-text { font-size: 0.75rem; opacity: 0.9; line-height: 1.4; text-align: center; }
+        .nav-buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 25px; align-items: center; position: relative; z-index: 2; }
+        .bbs-announce { 
+            display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 450px; 
+            padding: 10px 20px; background: rgba(255,255,255,0.9); text-decoration: none; transition: all 0.3s ease; 
+            border-radius: 4px; border: 2px solid; 
+        }
+        .btn-recruit { color: var(--recruit-color); border-color: var(--recruit-color); }
+        .btn-car { color: var(--car-color); border-color: var(--car-color); }
+        .btn-train { color: var(--train-color); border-color: var(--train-color); }
+        .btn-main-text { font-weight: bold; font-size: 1rem; margin-bottom: 2px; }
 
-        .mode-switch { cursor: pointer; padding: 8px 12px; background: rgba(0,0,0,0.1); border-radius: 20px; font-size: 0.8rem; }
+        .main-oc-title { 
+            text-align: center; font-size: 1.5rem; font-weight: bold; 
+            color: var(--line-color); margin-bottom: 20px; 
+            display: flex; align-items: center; justify-content: center; gap: 10px; 
+            position: relative; z-index: 2;
+            /* 白い縁取りを維持 */
+            text-shadow: 1.5px 1.5px 0 #fff, -1.5px -1.5px 0 #fff, 1.5px -1.5px 0 #fff, -1.5px 1.5px 0 #fff;
+        }
 
-        .main-oc-title { text-align: center; font-size: 1.5rem; font-weight: bold; color: var(--line-color); margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        body.dark-mode .main-oc-title { color: var(--line-color); }
-
-        .section-grid { display: flex; flex-direction: column; gap: 25px; margin-bottom: 40px; }
-        .info-card { background: #fff; padding: 25px; border-radius: 2px; border-top: 6px solid; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; width: 100%; }
-        .info-card p { line-height: 1.8; margin: 15px 0; font-size: 1.05rem; }
+        .section-grid { display: flex; flex-direction: column; gap: 25px; margin-bottom: 40px; position: relative; z-index: 2; }
+        .info-card { background: rgba(255,255,255,0.9); padding: 25px; border-radius: 2px; border-top: 6px solid; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .car-card { border-color: var(--car-color); }
         .train-card { border-color: var(--train-color); }
 
-        body.dark-mode .info-card { background: #2a2a2a; }
-
-        .link-button { display: block; padding: 14px; color: white; text-decoration: none; border-radius: 2px; font-weight: bold; text-align: center; transition: 0.3s; font-size: 1rem; border: none; cursor: pointer; }
-        .link-button:hover { filter: brightness(1.1); transform: scale(1.02); }
-
-        /* 掲示板セクションの境界点線を削除 */
-        .bbs-section { margin-top: 60px; padding-top: 40px; } 
+        .link-button { display: block; padding: 14px; color: white; text-decoration: none; border-radius: 2px; font-weight: bold; text-align: center; }
+        .bbs-section { margin-top: 60px; padding-top: 40px; position: relative; z-index: 2; } 
         .bbs-title { border-left: 5px solid var(--main-color); padding-left: 10px; font-size: 1.3rem; margin-bottom: 10px; font-weight: bold; }
-        .bbs-desc { font-size: 0.9rem; color: #666; margin-bottom: 15px; padding-left: 15px; line-height: 1.6; }
-        body.dark-mode .bbs-desc { color: #aaa; }
-
         .bbs-wrap { background: #fff; padding: 10px; border-radius: 4px; border: 1px solid #ddd; min-height: 450px; overflow: hidden; margin-bottom: 20px; }
 
-        .btn-black { background: #000 !important; color: #fff; }
-        .btn-trigger-contact { background: #555; color: #fff; padding: 12px 20px; border: none; cursor: pointer; border-radius: 2px; margin-top: 30px; width: 100%; }
-
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(3px); }
-        .modal-content { background-color: var(--container-bg); margin: 10% auto; padding: 30px; width: 90%; max-width: 500px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); position: relative; }
-        
-        .profile-header { text-align: center; border-bottom: 2px solid var(--main-color); padding-bottom: 10px; margin-bottom: 20px; }
-        .profile-text { line-height: 2; font-size: 1.1rem; }
-
-        footer { text-align: center; margin-top: 40px; }
-        .footer-hashtags { margin-bottom: 10px; color: var(--car-color); font-weight: bold; font-size: 0.9rem; }
+        footer { text-align: center; margin-top: 40px; position: relative; z-index: 2; }
         .footer-copy { font-size: 0.8rem; color: #888; }
+
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); }
+        .modal-content { background-color: #fff; margin: 10% auto; padding: 30px; width: 90%; max-width: 500px; border-radius: 8px; position: relative; }
     </style>
 </head>
 <body>
@@ -158,82 +116,58 @@
     <div class="wrapper">
         <div class="ticker-container">
             <div class="news-ticker">
-                <span>ゲーム「Car Parking Multiplayer」におけるクランは加入枠が残り一人となっております。今後定数の拡張も検討しております。</span>
+                <span>ゲーム「Car Parking Multiplayer」クランメンバー募集中！残り枠わずかです。</span>
             </div>
         </div>
 
         <div class="container">
-            <div class="global-tools">
-                <div id="google_translate_element"></div>
-                <div class="mode-switch" onclick="toggleDarkMode()"><i class="fas fa-palette"></i> Color Mode</div>
-                
-                <button class="admin-intro-btn" onclick="document.getElementById('introModal').style.display='block'">
-                    <i class="fas fa-user-circle"></i> 代表紹介
-                </button>
+            <div style="display: flex; gap: 10px; margin-bottom: 20px; position: relative; z-index: 2;">
+                <div class="mode-switch" onclick="document.body.classList.toggle('dark-mode')" style="cursor:pointer; padding:8px 12px; background:rgba(0,0,0,0.1); border-radius:20px; font-size:0.8rem;">Color Mode</div>
+                <button onclick="document.getElementById('introModal').style.display='block'" style="margin-left:auto; background:var(--accent-yellow); border:none; padding:8px 15px; border-radius:20px; font-weight:bold; cursor:pointer;">代表紹介</button>
             </div>
 
             <header>
                 <h2>[VFU] 乗り物研究会</h2>
-                <span class="subtitle" style="display:block; margin-top:5px;">公式ホームページ</span>
-                
                 <div class="nav-buttons">
-                    <a href="#bbs-car" class="bbs-announce btn-car btn-recruit">
-                        <span class="btn-main-text"><i class="fas fa-users"></i> CPMクランメンバー募集あり！</span>
-                        <span class="btn-sub-text">車部交流掲示板へ移動</span>
-                    </a>
-
-                    <a href="#bbs-car" class="bbs-announce btn-car">
-                        <span class="btn-main-text"><i class="fas fa-car"></i> 車部掲示板へ</span>
-                    </a>
-                    <a href="#bbs-train" class="bbs-announce btn-train">
-                        <span class="btn-main-text"><i class="fas fa-train"></i> 鉄道部掲示板へ</span>
-                    </a>
+                    <a href="#bbs-recruit" class="bbs-announce btn-recruit"><span class="btn-main-text">クランメンバー募集掲示板</span></a>
+                    <a href="#bbs-car" class="bbs-announce btn-car"><span class="btn-main-text">車部掲示板</span></a>
+                    <a href="#bbs-train" class="bbs-announce btn-train"><span class="btn-main-text">鉄道部掲示板</span></a>
                 </div>
             </header>
 
-            <div class="main-oc-title">
-                <i class="fas fa-comments"></i> オープンチャット
-            </div>
-
+            <div class="main-oc-title">オープンチャット</div>
             <div class="section-grid">
                 <div class="info-card car-card">
-                    <div style="font-size: 2.5rem; color: var(--car-color); text-align:center;"><i class="fas fa-car-side"></i></div>
-                    <h3 style="margin:10px 0; text-align:center;">車部</h3>
-                    <p>ゲーム「Car Parking Multiplayer」にてドリフトチームとして活動中！車への関心がある方ならどなたでも歓迎します！</p>
+                    <h3 style="text-align:center;"><i class="fa-solid fa-car"></i> 車部</h3>
+                    <p>ゲーム「Car Parking Multiplayer」にてドリフトチームとして活動中！</p>
                     <a href="https://line.me/ti/g2/cNYfg2t-UbI88zQXJ2hcLJGL7SHfbDy0Ma_jRA" class="link-button" style="background:var(--car-color)">LINE OpenChat</a>
                 </div>
-
                 <div class="info-card train-card">
-                    <div style="font-size: 2.5rem; color: var(--train-color); text-align:center;"><i class="fas fa-train"></i></div>
-                    <h3 style="margin:10px 0; text-align:center;">鉄道部</h3>
+                    <h3 style="text-align:center;"><i class="fa-solid fa-train"></i> 鉄道部</h3>
                     <p>フォトコンテストや情報交換などを催しております！</p>
                     <a href="https://line.me/ti/g2/KSS7B2ene7TeqqOIaKvDxjq-keGQNRmMSuRV8g" class="link-button" style="background:var(--train-color)">LINE OpenChat</a>
                 </div>
             </div>
 
-            <div class="bbs-section" id="bbs-car">
-                <h3 class="bbs-title" style="border-color: var(--car-color);">車部掲示板</h3>
+            <div class="bbs-section" id="bbs-recruit">
+                <h3 class="bbs-title" style="border-color: var(--recruit-color);">クランメンバー募集掲示板</h3>
                 <div class="bbs-wrap">
                     <script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
-                    <hyvor-talk-comments website-id="14750" language="ja" page-id="car_bbs"></hyvor-talk-comments>
+                    <hyvor-talk-comments website-id="14750" language="ja" page-id="recruit_bbs"></hyvor-talk-comments>
                 </div>
+            </div>
+
+            <div class="bbs-section" id="bbs-car">
+                <h3 class="bbs-title" style="border-color: var(--car-color);">車部掲示板</h3>
+                <div class="bbs-wrap"><hyvor-talk-comments website-id="14750" language="ja" page-id="car_bbs"></hyvor-talk-comments></div>
             </div>
 
             <div class="bbs-section" id="bbs-train">
                 <h3 class="bbs-title" style="border-color: var(--train-color);">鉄道部掲示板</h3>
-                <div class="bbs-wrap">
-                    <hyvor-talk-comments website-id="14750" language="ja" page-id="train_bbs"></hyvor-talk-comments>
-                </div>
-            </div>
-
-            <div style="text-align: center;">
-                <button class="btn-trigger-contact" onclick="document.getElementById('contactModal').style.display='block'">
-                    <i class="fas fa-envelope"></i> お問い合わせはこちら / Contact Us
-                </button>
+                <div class="bbs-wrap"><hyvor-talk-comments website-id="14750" language="ja" page-id="train_bbs"></hyvor-talk-comments></div>
             </div>
 
             <footer>
-                <div class="footer-hashtags">#カーパーキング</div>
                 <div class="footer-copy">&copy; 2024 [VFU] 乗り物研究会 All Rights Reserved.</div>
             </footer>
         </div>
@@ -242,49 +176,11 @@
 
 <div id="introModal" class="modal">
     <div class="modal-content">
-        <div class="profile-header">
-            <h3>代表プロフィール</h3>
-            <p style="color:var(--main-color); font-weight:bold;">新宿レーサー544</p>
-        </div>
-        <div class="profile-text">
-            鉄道好き、及び車好きの中学(中高一貫校)三年生です。いずれの趣味も深く究めているわけではないです。どうぞよろしく願います。
-        </div>
-        <button type="button" onclick="document.getElementById('introModal').style.display='none'" style="width:100%; background:var(--main-color); color:#fff; border:none; padding:12px; margin-top:25px; cursor:pointer; border-radius: 4px; font-weight:bold;">閉じる</button>
+        <h3>代表プロフィール</h3>
+        <p>新宿レーサー544</p>
+        <button onclick="document.getElementById('introModal').style.display='none'" style="width:100%; padding:10px; margin-top:20px; cursor:pointer;">閉じる</button>
     </div>
 </div>
-
-<div id="contactModal" class="modal">
-    <div class="modal-content">
-        <h3>お問い合わせ / Contact</h3>
-        <form onsubmit="alert('送信しました'); return false;">
-            <input type="text" placeholder="お名前" required style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px;">
-            <input type="email" placeholder="メールアドレス" required style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px;">
-            <textarea placeholder="内容をご記入ください" rows="4" required style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
-            <button type="submit" class="link-button btn-black" style="width: 100%;">送信する</button>
-            <button type="button" onclick="document.getElementById('contactModal').style.display='none'" style="width:100%; background:#ccc; border:none; padding:10px; margin-top:10px; cursor:pointer; border-radius: 4px;">閉じる</button>
-        </form>
-    </div>
-</div>
-
-<script>
-    function toggleDarkMode() {
-        document.body.classList.toggle('dark-mode');
-    }
-
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'ja', layout: google.translate.TranslateElement.InlineMethod.SIMPLE}, 'google_translate_element');
-    }
-
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('contactModal')) {
-            document.getElementById('contactModal').style.display = "none";
-        }
-        if (event.target == document.getElementById('introModal')) {
-            document.getElementById('introModal').style.display = "none";
-        }
-    }
-</script>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
