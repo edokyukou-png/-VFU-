@@ -16,6 +16,7 @@
             --car-color: #ae2631; 
             --train-color: #274a78; 
             --accent-yellow: #ffcc00; 
+            --line-color: #06C755; 
             --bg-gradient: linear-gradient(-45deg, #2d1933, #4b2d71, #6b4095, #3a243b);
             --container-bg: rgba(255, 255, 255, 0.92);
             --text-color: #333;
@@ -26,6 +27,7 @@
             --text-color: #eee;
         }
 
+        html { scroll-behavior: smooth; }
         * { box-sizing: border-box; }
 
         body {
@@ -37,7 +39,7 @@
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
             transition: 0.3s;
-            overflow-x: hidden; /* 横揺れ防止 */
+            overflow-x: hidden;
         }
 
         @keyframes gradient {
@@ -46,8 +48,42 @@
             100% { background-position: 0% 50%; }
         }
 
-        .overlay { min-height: 100vh; background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(5px); padding: 10px 10px 60px 10px; }
-        .wrapper { max-width: 800px; margin: 0 auto; } /* 幅を少し絞って読みやすく */
+        .overlay { min-height: 100vh; background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(5px); padding: 20px 10px 60px 10px; position: relative; }
+        .wrapper { max-width: 800px; margin: 0 auto; }
+
+        /* グローバルツールのレイアウト */
+        .global-tools { 
+            display: flex; 
+            justify-content: flex-start; 
+            align-items: center; 
+            margin-bottom: 20px; 
+            flex-wrap: wrap; 
+            gap: 10px; 
+        }
+
+        /* 代表紹介ボタンの設定 */
+        .admin-intro-btn {
+            background: var(--accent-yellow);
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.8rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: auto; 
+            margin-right: 10px; 
+        }
+        .admin-intro-btn:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
 
         .ticker-container {
             width: 100%;
@@ -68,37 +104,24 @@
         header { text-align: center; margin-bottom: 30px; border-bottom: 1px solid #ddd; padding-bottom: 20px; }
         h2 { font-size: clamp(1.4rem, 6vw, 2.2rem); color: var(--main-color); margin: 0; line-height: 1.3; }
         
-        .bbs-announce { 
-            display: inline-block; 
-            margin-top: 10px; 
-            padding: 6px 15px; 
-            background: var(--main-color); 
-            color: #fff; 
-            font-size: 0.85rem; 
-            border-radius: 20px; 
-            font-weight: bold;
-        }
+        .nav-buttons { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; align-items: center; }
+        .bbs-announce { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 500px; padding: 12px 15px; color: #fff; border-radius: 8px; text-decoration: none; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .btn-car { background: var(--car-color); }
+        .btn-train { background: var(--train-color); }
+        .btn-recruit { background: linear-gradient(90deg, #ae2631, #8b1c26); border: 2px solid var(--accent-yellow); }
+        .bbs-announce:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
+        
+        .btn-main-text { font-weight: bold; font-size: 1rem; margin-bottom: 4px; }
+        .btn-sub-text { font-size: 0.75rem; opacity: 0.9; line-height: 1.4; text-align: center; }
 
-        .global-tools { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
         .mode-switch { cursor: pointer; padding: 8px 12px; background: rgba(0,0,0,0.1); border-radius: 20px; font-size: 0.8rem; }
 
-        /* ボックスを縦並びに固定 */
-        .section-grid { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 25px; 
-            margin-bottom: 40px; 
-        }
+        .main-oc-title { text-align: center; font-size: 1.5rem; font-weight: bold; color: var(--line-color); margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        body.dark-mode .main-oc-title { color: var(--line-color); }
 
+        .section-grid { display: flex; flex-direction: column; gap: 25px; margin-bottom: 40px; }
         .info-card { background: #fff; padding: 25px; border-radius: 2px; border-top: 6px solid; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; width: 100%; }
-        
-        /* 行間を広げて文字を見やすく */
-        .info-card p {
-            line-height: 1.8;
-            margin: 15px 0;
-            font-size: 1.05rem;
-        }
-
+        .info-card p { line-height: 1.8; margin: 15px 0; font-size: 1.05rem; }
         .car-card { border-color: var(--car-color); }
         .train-card { border-color: var(--train-color); }
 
@@ -107,26 +130,26 @@
         .link-button { display: block; padding: 14px; color: white; text-decoration: none; border-radius: 2px; font-weight: bold; text-align: center; transition: 0.3s; font-size: 1rem; border: none; cursor: pointer; }
         .link-button:hover { filter: brightness(1.1); transform: scale(1.02); }
 
-        .bbs-section { margin-top: 40px; padding-top: 30px; border-top: 2px dashed #ddd; }
-        .bbs-title { border-left: 5px solid var(--main-color); padding-left: 10px; font-size: 1.2rem; margin-bottom: 15px; }
+        /* 掲示板セクションの境界点線を削除 */
+        .bbs-section { margin-top: 60px; padding-top: 40px; } 
+        .bbs-title { border-left: 5px solid var(--main-color); padding-left: 10px; font-size: 1.3rem; margin-bottom: 10px; font-weight: bold; }
+        .bbs-desc { font-size: 0.9rem; color: #666; margin-bottom: 15px; padding-left: 15px; line-height: 1.6; }
+        body.dark-mode .bbs-desc { color: #aaa; }
 
-        /* 掲示板のはみ出し防止 */
-        .bbs-wrap {
-            background: #fff; 
-            padding: 10px; 
-            border-radius: 4px; 
-            border: 1px solid #ddd; 
-            min-height: 400px;
-            overflow: hidden;
-        }
+        .bbs-wrap { background: #fff; padding: 10px; border-radius: 4px; border: 1px solid #ddd; min-height: 450px; overflow: hidden; margin-bottom: 20px; }
 
         .btn-black { background: #000 !important; color: #fff; }
         .btn-trigger-contact { background: #555; color: #fff; padding: 12px 20px; border: none; cursor: pointer; border-radius: 2px; margin-top: 30px; width: 100%; }
 
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); }
-        .modal-content { background-color: var(--container-bg); margin: 10% auto; padding: 30px; width: 90%; max-width: 450px; border-radius: 4px; }
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(3px); }
+        .modal-content { background-color: var(--container-bg); margin: 10% auto; padding: 30px; width: 90%; max-width: 500px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); position: relative; }
+        
+        .profile-header { text-align: center; border-bottom: 2px solid var(--main-color); padding-bottom: 10px; margin-bottom: 20px; }
+        .profile-text { line-height: 2; font-size: 1.1rem; }
 
-        footer { text-align: center; margin-top: 40px; font-size: 0.8rem; color: #888; }
+        footer { text-align: center; margin-top: 40px; }
+        .footer-hashtags { margin-bottom: 10px; color: var(--car-color); font-weight: bold; font-size: 0.9rem; }
+        .footer-copy { font-size: 0.8rem; color: #888; }
     </style>
 </head>
 <body>
@@ -141,40 +164,65 @@
 
         <div class="container">
             <div class="global-tools">
-                <div class="mode-switch" onclick="toggleDarkMode()"><i class="fas fa-palette"></i> Color Mode</div>
                 <div id="google_translate_element"></div>
+                <div class="mode-switch" onclick="toggleDarkMode()"><i class="fas fa-palette"></i> Color Mode</div>
+                
+                <button class="admin-intro-btn" onclick="document.getElementById('introModal').style.display='block'">
+                    <i class="fas fa-user-circle"></i> 代表紹介
+                </button>
             </div>
 
             <header>
                 <h2>[VFU] 乗り物研究会</h2>
                 <span class="subtitle" style="display:block; margin-top:5px;">公式ホームページ</span>
-                <div class="bbs-announce"><i class="fas fa-comments"></i> 下部に交流掲示板があります！</div>
+                
+                <div class="nav-buttons">
+                    <a href="#bbs-car" class="bbs-announce btn-car btn-recruit">
+                        <span class="btn-main-text"><i class="fas fa-users"></i> CPMクランメンバー募集あり！</span>
+                        <span class="btn-sub-text">車部交流掲示板へ移動</span>
+                    </a>
+
+                    <a href="#bbs-car" class="bbs-announce btn-car">
+                        <span class="btn-main-text"><i class="fas fa-car"></i> 車部掲示板へ</span>
+                    </a>
+                    <a href="#bbs-train" class="bbs-announce btn-train">
+                        <span class="btn-main-text"><i class="fas fa-train"></i> 鉄道部掲示板へ</span>
+                    </a>
+                </div>
             </header>
+
+            <div class="main-oc-title">
+                <i class="fas fa-comments"></i> オープンチャット
+            </div>
 
             <div class="section-grid">
                 <div class="info-card car-card">
                     <div style="font-size: 2.5rem; color: var(--car-color); text-align:center;"><i class="fas fa-car-side"></i></div>
                     <h3 style="margin:10px 0; text-align:center;">車部</h3>
-                    <p>ドリフトチームとして活動中！車への関心がある方ならどなたでも歓迎します！</p>
+                    <p>ゲーム「Car Parking Multiplayer」にてドリフトチームとして活動中！車への関心がある方ならどなたでも歓迎します！</p>
                     <a href="https://line.me/ti/g2/cNYfg2t-UbI88zQXJ2hcLJGL7SHfbDy0Ma_jRA" class="link-button" style="background:var(--car-color)">LINE OpenChat</a>
                 </div>
 
                 <div class="info-card train-card">
                     <div style="font-size: 2.5rem; color: var(--train-color); text-align:center;"><i class="fas fa-train"></i></div>
                     <h3 style="margin:10px 0; text-align:center;">鉄道部</h3>
-                    <p>駅名しりとりやフォトコンテストなどを催しております！</p>
+                    <p>フォトコンテストや情報交換などを催しております！</p>
                     <a href="https://line.me/ti/g2/KSS7B2ene7TeqqOIaKvDxjq-keGQNRmMSuRV8g" class="link-button" style="background:var(--train-color)">LINE OpenChat</a>
                 </div>
             </div>
 
-            <div class="bbs-section" id="bbs">
-                <h3 class="bbs-title">交流掲示板</h3>
+            <div class="bbs-section" id="bbs-car">
+                <h3 class="bbs-title" style="border-color: var(--car-color);">車部掲示板</h3>
                 <div class="bbs-wrap">
                     <script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
-                    <hyvor-talk-comments 
-                        website-id="14750" 
-                        language="ja">
-                    </hyvor-talk-comments>
+                    <hyvor-talk-comments website-id="14750" language="ja" page-id="car_bbs"></hyvor-talk-comments>
+                </div>
+            </div>
+
+            <div class="bbs-section" id="bbs-train">
+                <h3 class="bbs-title" style="border-color: var(--train-color);">鉄道部掲示板</h3>
+                <div class="bbs-wrap">
+                    <hyvor-talk-comments website-id="14750" language="ja" page-id="train_bbs"></hyvor-talk-comments>
                 </div>
             </div>
 
@@ -184,8 +232,24 @@
                 </button>
             </div>
 
-            <footer>&copy; 2024 [VFU] 乗り物研究会 All Rights Reserved.</footer>
+            <footer>
+                <div class="footer-hashtags">#カーパーキング</div>
+                <div class="footer-copy">&copy; 2024 [VFU] 乗り物研究会 All Rights Reserved.</div>
+            </footer>
         </div>
+    </div>
+</div>
+
+<div id="introModal" class="modal">
+    <div class="modal-content">
+        <div class="profile-header">
+            <h3>代表プロフィール</h3>
+            <p style="color:var(--main-color); font-weight:bold;">新宿レーサー544</p>
+        </div>
+        <div class="profile-text">
+            鉄道好き、及び車好きの中学(中高一貫校)三年生です。いずれの趣味も深く究めているわけではないです。どうぞよろしく願います。
+        </div>
+        <button type="button" onclick="document.getElementById('introModal').style.display='none'" style="width:100%; background:var(--main-color); color:#fff; border:none; padding:12px; margin-top:25px; cursor:pointer; border-radius: 4px; font-weight:bold;">閉じる</button>
     </div>
 </div>
 
@@ -205,8 +269,6 @@
 <script>
     function toggleDarkMode() {
         document.body.classList.toggle('dark-mode');
-        const icon = document.querySelector('.mode-switch i');
-        icon.className = 'fas fa-palette';
     }
 
     function googleTranslateElementInit() {
@@ -216,6 +278,9 @@
     window.onclick = function(event) {
         if (event.target == document.getElementById('contactModal')) {
             document.getElementById('contactModal').style.display = "none";
+        }
+        if (event.target == document.getElementById('introModal')) {
+            document.getElementById('introModal').style.display = "none";
         }
     }
 </script>
