@@ -1,40 +1,127 @@
-/* =========================================
-   1. カラー変数の定義（JSでここを書き換えます）
-   ========================================= */
+/* --- 1. 基本リセット --- */
+html, body { 
+    margin: 0; 
+    padding: 0; 
+    width: 100%; 
+    overflow-x: hidden; 
+}
+* { 
+    box-sizing: border-box; 
+}
+
+/* --- 2. カラー・変数設定（Color Modeの心臓部） --- */
 :root {
+    /* 【解説】JSで書き換える基本の色リストです */
     --main-color: #4b2d71; 
-    --container-bg: rgba(250, 248, 252, 0.98); 
-    --text-color: #222; 
     --car-color: #ae2631; 
-    --train-color: #274a78;
+    --train-color: #274a78; 
+    --recruit-color: #d4a017; 
+    --accent-yellow: #ffcc00; 
+    --line-color: #06C755; 
+    --youtube-color: #FF0000;
+    --bg-gradient: linear-gradient(-45deg, #2d1933, #4b2d71, #6b4095, #3a243b);
+    --container-bg: rgba(250, 248, 252, 0.98);
+    --text-color: #222; 
+    --bbs-title-color: #000000;
+    --official-text-color: #000000;
     --card-bg: rgba(255, 255, 255, 0.95);
 }
 
-/* =========================================
-   2. 全体の基本レイアウト
-   ========================================= */
+/* --- 3. 背景アニメーション（既存を維持） --- */
+html { scroll-behavior: smooth; }
 body {
-    margin: 0;
-    padding: 0;
     font-family: 'Noto Serif JP', serif;
-    /* 【解説】JSの色変更を確実に適用させるため !important を付けています */
-    background: var(--container-bg) !important;
     color: var(--text-color);
-    transition: background 0.3s ease, color 0.3s ease;
+    /* 【重要】!importantを付けず、JS側でbackgroundを上書きできるようにします */
+    background: var(--bg-gradient);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    transition: color 0.3s ease;
+}
+@keyframes gradient { 
+    0% { background-position: 0% 50%; } 
+    50% { background-position: 100% 50%; } 
+    100% { background-position: 0% 50%; } 
 }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 30px;
-    background: var(--container-bg);
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+/* --- 4. レイアウト構造 --- */
+.overlay { 
+    min-height: 100vh; 
+    background: rgba(0, 0, 0, 0.15); 
+    backdrop-filter: blur(5px); 
+    padding: 20px 10px 60px 10px; 
+}
+.wrapper { 
+    max-width: 800px; 
+    margin: 0 auto; 
 }
 
-/* =========================================
-   3. ヘッダーと新規バージョン表記
-   ========================================= */
-header {
-    text-align: center;
-    margin-bottom:
+/* --- 5. 電光掲示板（既存デザイン） --- */
+.ticker-container {
+    width: 100%; 
+    margin-bottom: 25px; 
+    background: rgba(0, 0, 0, 0.9); 
+    border-radius: 4px; 
+    border: 3px solid #ffffff; 
+    overflow: hidden; 
+}
+.news-ticker { 
+    padding: 12px 0; 
+    color: var(--accent-yellow); 
+    white-space: nowrap; 
+}
+.news-ticker span { 
+    display: inline-block; 
+    padding-left: 100%; 
+    animation: ticker 25s linear infinite; 
+    font-weight: bold; 
+}
+@keyframes ticker { 
+    0% { transform: translateX(0); } 
+    100% { transform: translateX(-100%); } 
+}
+
+/* --- 6. メインコンテナ --- */
+.container { 
+    background: var(--container-bg); 
+    padding: 30px 20px; 
+    border-radius: 4px; 
+    box-shadow: 0 10px 50px rgba(0,0,0,0.4); 
+    transition: background 0.3s ease;
+}
+
+header { 
+    text-align: center; 
+    margin-bottom: 30px; 
+    border-bottom: 1px solid rgba(150, 150, 150, 0.15); 
+    padding-bottom: 20px; 
+}
+
+/* 【新規】公式ホームページ直下のバージョン表記 */
+.version-tag-sub {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    margin-top: 4px;
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-color);
+}
+
+/* --- 7. 各ボタン類（既存デザイン） --- */
+.mode-switch { cursor: pointer; padding: 8px 12px; background: rgba(200,200,200,0.3); border-radius: 20px; font-size: 0.8rem; }
+.yt-small-btn { display: flex; align-items: center; gap: 6px; text-decoration: none; font-size: 0.8rem; color: var(--youtube-color); background: #fff; padding: 7px 12px; border-radius: 20px; margin-left: auto; margin-right: 10px; border: 1px solid var(--youtube-color); }
+.intro-btn { background: var(--accent-yellow); border: none; padding: 8px 15px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+
+.nav-buttons { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; align-items: center; }
+.bbs-announce { width: 100%; max-width: 450px; padding: 12px 20px; background: #ffffff; text-decoration: none; border-radius: 4px; border: 2.5px solid; text-align: center; }
+.btn-recruit { color: var(--recruit-color); border-color: var(--recruit-color); }
+.btn-car { color: var(--car-color); border-color: var(--car-color); }
+.btn-train { color: var(--train-color); border-color: var(--train-color); }
+
+/* --- 8. 掲示板セクション --- */
+.bbs-title { border-left: 6px solid var(--main-color); padding-left: 12px; font-size: 1.4rem; margin-bottom: 15px; color: var(--bbs-title-color); font-weight: bold; transition: border 0.3s; }
+.bbs-wrap { background: #fff; padding: 10px; border-radius: 4px; border: 1px solid #e0e0e0; min-height: 450px; }
+
+/* お問い合わせボタン中央寄せ（既存を維持） */
+.contact-section { width: 100%; text-align: center; margin: 40px 0; border-top: 1px solid rgba(150,150,150,0.1); padding-top: 20px;}
+.btn-contact { display: flex; align-items: center; justify-content: center; gap: 10px; width: fit-content; margin: 0 auto; padding: 14px 40px; background: #ffffff; color: #333; text-decoration: none; border: 2px solid #333; font-weight: bold; }
