@@ -49,8 +49,6 @@ body {
     50% { background-position: 100% 50%; } 
     100% { background-position: 0% 50%; } 
 }
-
-/* --- 4. レイアウト構造 --- */
 /* --- 4. レイアウト構造 --- */
 .overlay { 
     min-height: 100vh; 
@@ -61,9 +59,10 @@ body {
 }
 
 .wrapper { 
-    max-width: 800px; 
+    max-width: 750px; /* 800px から少し小さくすると、相対的に外側の余白が広く見えます */
     margin: 0 auto; 
 }
+
 
 /* --- 5. 電光掲示板 --- */
 .ticker-container {
