@@ -33,15 +33,17 @@ html, body {
     --official-text-color: #000000;
     --card-bg: rgba(255, 255, 255, 0.95);
 }
-
-body.dark-mode {
-    --container-bg: rgba(30, 25, 40, 0.98);
-    --text-color: #f5f5f5;
-    --bbs-title-color: #ffffff;
-    --official-text-color: #e0e0e0;
-    --card-bg: rgba(50, 45, 60, 0.95);
-    --main-color: #b388ff;
+/* --- [style.css] 30行目付近を修正 --- */
+body {
+    font-family: 'Noto Serif JP', serif;
+    color: var(--text-color);
+    /* ↓ background: var(--bg-gradient); ではなく、下の1行に変えてください */
+    background: var(--container-bg); 
+    background-size: 400% 400%;
+    /* アニメーションが白に戻るのを邪魔している場合は、一度ここをコメントアウトして確認してください */
+    /* animation: gradient 15s ease infinite; */
 }
+
 
 /* --- 3. 背景アニメーション --- */
 html { scroll-behavior: smooth; }
