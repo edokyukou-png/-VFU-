@@ -60,7 +60,7 @@ if (modeBtn) {
         } else if (currentVfuMode === 'car') {
             applyVfuTheme('train');
         } else {
-            applyVfuTheme('dark');
+            applyVfuTheme('light');
         }
     });
 }
