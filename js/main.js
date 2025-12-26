@@ -1,3 +1,17 @@
+// 【設定】ここを書き換えるだけでサイト上の表示が変わります
+const SITE_VERSION = "v1.3.0"; 
+
+document.addEventListener("DOMContentLoaded", () => {
+    // バージョンを表示させる処理
+    const versionEl = document.getElementById("site-version");
+    if (versionEl) {
+        versionEl.textContent = SITE_VERSION;
+    }
+
+    // --- 以下、既存の電光掲示板やモーダルのコード ---
+    const el = document.getElementById("ticker-text");
+    // ...略
+});
 // 1. 電光掲示板の更新
 const TICKER_TEXT = "ゲーム「Car Parking Multiplayer」クランメンバー募集中！残り枠わずかです。";
 
