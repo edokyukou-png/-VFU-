@@ -51,12 +51,15 @@ body {
 }
 
 /* --- 4. レイアウト構造 --- */
+/* --- 4. レイアウト構造 --- */
 .overlay { 
     min-height: 100vh; 
     background: rgba(0, 0, 0, 0.15); 
     backdrop-filter: blur(5px); 
-    padding: 20px 10px 60px 10px; /* 一番上の紫バーを20px確保 */
+    /* 左右の 10px を 20px〜30px 程度に広げる */
+    padding: 20px 25px 60px 25px; 
 }
+
 .wrapper { 
     max-width: 800px; 
     margin: 0 auto; 
