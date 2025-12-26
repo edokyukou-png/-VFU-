@@ -1,74 +1,84 @@
+/**
+ * VFU System v1.4.0 拡張機能
+ * デフォルト：白（light）から始まるループ
+ */
+
+// 1. 各モードの色レシピ（バケツの中身）
 const VFU_THEMES = {
     'light': {
-        '--main-color': '#4b2d71',
-        '--container-bg': 'rgba(250, 248, 252, 0.98)', // 白
-        '--text-color': '#222',
-        '--official-text-color': '#000000',
+        '--main-color': '#4b2d71',          // 元々の紫
+        '--container-bg': 'rgba(250, 248, 252, 0.98)', // 白背景
+        '--text-color': '#222',             // 黒文字
         '--card-bg': 'rgba(255, 255, 255, 0.95)'
     },
     'dark': {
-        '--main-color': '#b388ff',
-        '--container-bg': 'rgba(30, 25, 40, 0.98)', // 紫黒
-        '--text-color': '#f5f5f5',
-        '--official-text-color': '#e0e0e0',
+        '--main-color': '#b388ff',          // 明るい紫
+        '--container-bg': 'rgba(30, 25, 40, 0.98)',   // 濃い紫背景
+        '--text-color': '#f5f5f5',          // 白文字
         '--card-bg': 'rgba(50, 45, 60, 0.95)'
     },
     'car': {
-        '--main-color': '#ae2631',
-        '--container-bg': 'rgba(45, 15, 15, 0.98)', // 赤
-        '--text-color': '#ffdada',
-        '--official-text-color': '#ffbaba',
+        '--main-color': '#ae2631',          // 車部の赤
+        '--container-bg': 'rgba(45, 15, 15, 0.98)',   // 赤黒背景
+        '--text-color': '#ffdada',          // 薄い赤文字
         '--card-bg': 'rgba(70, 30, 30, 0.95)'
     },
     'train': {
-        '--main-color': '#0072bc',
-        '--container-bg': 'rgba(15, 25, 45, 0.98)', // 青
-        '--text-color': '#e1f5fe',
-        '--official-text-color': '#b3e5fc',
+        '--main-color': '#0072bc',          // 鉄道部の青
+        '--container-bg': 'rgba(15, 25, 45, 0.98)',   // 青黒背景
+        '--text-color': '#e1f5fe',          // 薄い青文字
         '--card-bg': 'rgba(30, 40, 60, 0.95)'
     }
 };
 
-let currentVfuMode = 'light';
+let currentMode = 'light';
 
-function applyVfuTheme(mode) {
+// 2. テーマを適用する関数
+function applyTheme(mode) {
     const root = document.documentElement;
-    const themeData = VFU_THEMES[mode];
+    const colors = VFU_THEMES[mode];
 
-    // 全ての変数を書き換え
-    Object.keys(themeData).forEach(key => {
-        root.style.setProperty(key, themeData[key]);
+    // CSS変数を上書き
+    Object.keys(colors).forEach(key => {
+        root.style.setProperty(key, colors[key]);
     });
 
-    // 白(light)に戻る時は、bodyの背景も強制的に上書き
+    // 【重要】白に戻るためにCSSのクラス干渉を防ぐ
     if (mode === 'light') {
-        document.body.style.background = themeData['--container-bg'];
         document.body.classList.remove("dark-mode");
     } else {
-        document.body.style.background = "none"; // アニメーション等を有効にする場合
         document.body.classList.add("dark-mode");
     }
 
-    currentVfuMode = mode;
+    currentMode = mode;
 }
 
+// 3. ページ読み込み時の処理
 document.addEventListener("DOMContentLoaded", () => {
-    applyVfuTheme('light'); // 初期化
+    
+    // 初期状態を白に設定
+    applyTheme('light');
 
+    // 電光掲示板
+    const ticker = document.getElementById("ticker-text");
+    if (ticker) ticker.textContent = "ゲーム「Car Parking Multiplayer」クランメンバー募集中！";
+
+    // モーダル
+    const modal = document.getElementById("introModal");
+    const openBtn = document.getElementById("introBtn");
+    const closeBtn = document.getElementById("closeModal");
+    if (openBtn) openBtn.onclick = () => modal.style.display = "block";
+    if (closeBtn) closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; };
+
+    // 【説明】カラーモードの切り替えボタンの動作
     const modeBtn = document.getElementById("modeBtn");
     if (modeBtn) {
         modeBtn.onclick = () => {
-            if (currentVfuMode === 'light') applyVfuTheme('dark');
-            else if (currentVfuMode === 'dark') applyVfuTheme('car');
-            else if (currentVfuMode === 'car') applyVfuTheme('train');
-            else applyVfuTheme('light'); // ここで白へ
+            if (currentMode === 'light') applyTheme('dark');
+            else if (currentMode === 'dark') applyTheme('car');
+            else if (currentMode === 'car') applyTheme('train');
+            else applyTheme('light'); // 白に戻る
         };
     }
-
-    // 掲示板やモーダルの既存処理
-    const el = document.getElementById("ticker-text");
-    if (el) el.textContent = "ゲーム「Car Parking Multiplayer」クランメンバー募集中！残り枠わずかです。";
-    const modal = document.getElementById("introModal");
-    const introBtn = document.getElementById("introBtn");
-    if (introBtn) introBtn.onclick = () => modal.style.display = "block";
 });
