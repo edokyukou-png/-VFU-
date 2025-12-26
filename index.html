@@ -3,86 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VFU Official Website</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <meta name="google-site-verification" content="ModqEC8cLYc8sRdtPgxy8etQ8cFHHH5i-A2FM3EqTlk" />
+    <title>[VFU] 乗り物研究会 Official</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&family=Montserrat:wght@600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="overlay">
-        <div class="wrapper">
-            <div class="ticker-container">
-                <div class="news-ticker">
-                    <span id="ticker-text">Loading...</span>
-                </div>
+
+<div class="overlay">
+    <div class="wrapper">
+        <div class="ticker-container">
+            <div class="news-ticker">
+                <span id="ticker-text"></span>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="top-nav-row">
+                <div class="mode-switch" id="modeBtn">Color Mode</div>
+                <a href="https://youtube.com/channel/UC89nqPmlDkD0K90C2Tr1pVQ?si=K6qKvI5ww5COhGIC" target="_blank" class="yt-small-btn">
+                    <i class="fa-brands fa-youtube"></i> YouTube
+                </a>
+                <button class="intro-btn" id="introBtn">代表紹介</button>
             </div>
 
-            <div class="container">
-                <div class="top-nav-row">
-                    <div id="modeBtn" class="mode-switch">
-                        <i class="fas fa-palette"></i> Color Mode
-                    </div>
-                    <a href="#" class="yt-small-btn">
-                        <i class="fab fa-youtube"></i> YouTube
-                    </a>
-                    <button id="introBtn" class="intro-btn">はじめに</button>
-                </div>
-
-                <header>
-                    <h2>VFU System</h2>
-                    <span class="official-text">OFFICIAL WEBSITE</span>
-                </header>
-
+            <header>
+                <h2>[VFU] 乗り物研究会</h2>
+                <span class="official-text">公式ホームページ</span>
+                
                 <div class="nav-buttons">
-                    <a href="#" class="bbs-announce btn-recruit">メンバー募集掲示板</a>
-                    <a href="#" class="bbs-announce btn-car">車部 交流掲示板</a>
-                    <a href="#" class="bbs-announce btn-train">鉄道部 交流掲示板</a>
+                    <a href="#bbs-recruit" class="bbs-announce btn-recruit"><span class="btn-main-text">クランメンバー募集掲示板</span></a>
+                    <a href="#bbs-car" class="bbs-announce btn-car"><span class="btn-main-text">車部掲示板</span></a>
+                    <a href="#bbs-train" class="bbs-announce btn-train"><span class="btn-main-text">鉄道部掲示板</span></a>
                 </div>
+            </header>
 
-                <div class="main-oc-title">MAIN OPEN CHAT</div>
-                <div class="section-grid">
-                    <div class="info-card car-card">
-                        <i class="fas fa-car icon-car"></i>
+            <div class="main-oc-title">オープンチャット</div>
+            <div class="section-grid">
+                <div class="info-card car-card">
+                    <div class="card-icon-wrapper">
+                        <i class="fa-solid fa-car icon-car"></i>
                         <h3>車部</h3>
-                        <p>Car Parking Multiplayerを中心に活動中</p>
-                        <a href="#" class="link-button" style="background-color: var(--car-color);">参加する</a>
                     </div>
-                    <div class="info-card train-card">
-                        <i class="fas fa-train icon-train"></i>
+                    <p>ゲーム「Car Parking Multiplayer」にてドリフトチームとして活動中！</p>
+                    <a href="https://line.me/ti/g2/cNYfg2t-UbI88zQXJ2hcLJGL7SHfbDy0Ma_jRA" class="link-button" style="background:var(--car-color)">LINE OpenChat</a>
+                </div>
+                <div class="info-card train-card">
+                    <div class="card-icon-wrapper">
+                        <i class="fa-solid fa-train icon-train"></i>
                         <h3>鉄道部</h3>
-                        <p>鉄道シミュレーターや写真共有など</p>
-                        <a href="#" class="link-button" style="background-color: var(--train-color);">参加する</a>
                     </div>
+                    <p>フォトコンテストや情報交換などを催しております！</p>
+                    <a href="https://line.me/ti/g2/KSS7B2ene7TeqqOIaKvDxjq-keGQNRmMSuRV8g" class="link-button" style="background:var(--train-color)">LINE OpenChat</a>
                 </div>
-
-                <div class="bbs-section">
-                    <div class="bbs-title">総合掲示板</div>
-                    <div class="bbs-wrap">
-                        </div>
-                </div>
-
-                <div class="contact-section">
-                    <a href="#" class="btn-contact">
-                        <i class="fas fa-envelope"></i> お問い合わせ
-                    </a>
-                </div>
-
-                <footer>
-                    <div class="hashtag-footer">#VFU_System</div>
-                    <div style="font-size: 0.7rem; opacity: 0.5; margin-top: 10px;">v1.4.0</div>
-                </footer>
             </div>
+
+            <div class="bbs-section" id="bbs-recruit">
+                <h3 class="bbs-title">クランメンバー募集掲示板</h3>
+                <div class="bbs-wrap">
+                    <script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
+                    <hyvor-talk-comments website-id="14750" language="ja" page-id="recruit_bbs"></hyvor-talk-comments>
+                </div>
+            </div>
+
+            <div class="bbs-section" id="bbs-car">
+                <h3 class="bbs-title">車部掲示板</h3>
+                <div class="bbs-wrap"><hyvor-talk-comments website-id="14750" language="ja" page-id="car_bbs"></hyvor-talk-comments></div>
+            </div>
+
+            <div class="bbs-section" id="bbs-train">
+                <h3 class="bbs-title">鉄道部掲示板</h3>
+                <div class="bbs-wrap"><hyvor-talk-comments website-id="14750" language="ja" page-id="train_bbs"></hyvor-talk-comments></div>
+            </div>
+
+            <div class="contact-section">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdWn6aTgvMd9kk5uIlRd6wQL59M7QaKLOfFxzPlAJSAQb5zVA/viewform?usp=dialog" target="_blank" class="btn-contact">
+                    <i class="fa-solid fa-envelope"></i> お問い合わせ
+                </a>
+            </div>
+
+            <footer>
+                <div class="hashtag-footer">#カーパーキング　クラン</div>
+                <div class="footer-copy">&copy; 2024 [VFU] 乗り物研究会 All Rights Reserved.</div>
+                <div style="font-size: 0.7rem; opacity: 0.5; margin-top: 10px; text-align: center; color: var(--text-color);">v1.4.0</div>
+            </footer>
         </div>
     </div>
+</div>
 
-    <div id="introModal" class="modal">
-        <div class="modal-content">
-            <h3>VFU System へようこそ</h3>
-            <p>このサイトは、CPMクラン及び各部門のポータルサイトです。</p>
-            <button id="closeModal" class="intro-btn" style="margin-top:20px;">閉じる</button>
-        </div>
+<div id="introModal" class="modal">
+    <div class="modal-content">
+        <h3>代表プロフィール</h3>
+        <span class="modal-name">新宿レーサー544</span>
+        <p class="modal-intro">鉄道、及び車好きの中学三年生(中高一貫校)です。いずれの趣味も深く究めているわけではありませんが、どうぞよろしく願います。</p>
+        <button id="closeModal" style="width:100%; padding:10px; margin-top:20px; cursor:pointer; background:#f0f0f0; border:1px solid #ccc; border-radius:4px; color: #333;">閉じる</button>
     </div>
+</div>
 
-    <script src="js/main.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
