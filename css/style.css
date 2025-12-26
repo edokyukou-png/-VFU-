@@ -1,6 +1,8 @@
+/* --- 1. 基本リセット --- */
 html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
 * { box-sizing: border-box; }
 
+/* --- 2. カラー・変数設定 --- */
 :root {
     --main-color: #4b2d71; 
     --car-color: #ae2631; 
@@ -26,6 +28,7 @@ body.dark-mode {
     --main-color: #b388ff;
 }
 
+/* --- 3. 背景アニメーション --- */
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Noto Serif JP', serif;
@@ -36,12 +39,14 @@ body {
 }
 @keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
+/* --- 4. レイアウト構造 --- */
 .overlay { 
     min-height: 100vh; background: rgba(0, 0, 0, 0.15); backdrop-filter: blur(5px); 
-    padding: 20px 10px 60px 10px; /* ここが一番上の紫バーの太さです */
+    padding: 20px 10px 60px 10px; 
 }
 .wrapper { max-width: 800px; margin: 0 auto; }
 
+/* --- 5. 電光掲示板 --- */
 .ticker-container {
     width: 100%; margin-bottom: 25px; background: rgba(0, 0, 0, 0.9); border-radius: 4px; border: 3px solid #ffffff; 
     overflow: hidden; box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
@@ -50,7 +55,9 @@ body {
 .news-ticker span { display: inline-block; padding-left: 100%; animation: ticker 25s linear infinite; font-weight: bold; }
 @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
+/* --- 6. メインコンテンツ --- */
 .container { background: var(--container-bg); padding: 30px 20px; border-radius: 4px; box-shadow: 0 10px 50px rgba(0,0,0,0.4); }
+
 .top-nav-row { display: flex; align-items: center; margin-bottom: 20px; }
 .mode-switch { cursor: pointer; padding: 8px 12px; background: rgba(200,200,200,0.3); border-radius: 20px; font-size: 0.8rem; }
 .yt-small-btn { display: flex; align-items: center; gap: 6px; text-decoration: none; font-size: 0.8rem; color: var(--youtube-color); background: #fff; padding: 7px 12px; border-radius: 20px; margin-left: auto; margin-right: 10px; border: 1px solid var(--youtube-color); }
@@ -60,12 +67,15 @@ header { text-align: center; margin-bottom: 30px; border-bottom: 1px solid rgba(
 h2 { font-size: clamp(1.6rem, 7vw, 2.5rem); color: var(--main-color); margin: 0; }
 .official-text { font-size: 0.95rem; color: var(--official-text-color); font-weight: bold; margin-top: 8px; display: block; }
 
+/* --- 7. 掲示板リンクボタン --- */
 .nav-buttons { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; align-items: center; }
-.bbs-announce { width: 100%; max-width: 450px; padding: 12px 20px; background: #ffffff; text-decoration: none; border-radius: 4px; border: 2.5px solid; text-align: center; }
+.bbs-announce { width: 100%; max-width: 450px; padding: 12px 20px; background: #ffffff; text-decoration: none; border-radius: 4px; border: 2.5px solid; text-align: center; transition: 0.3s; }
+.bbs-announce:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 .btn-recruit { color: var(--recruit-color); border-color: var(--recruit-color); }
 .btn-car { color: var(--car-color); border-color: var(--car-color); }
 .btn-train { color: var(--train-color); border-color: var(--train-color); }
 
+/* --- 8. オープンチャットカード --- */
 .main-oc-title { text-align: center; font-size: 1.5rem; font-weight: bold; color: var(--line-color); margin: 30px 0; }
 .section-grid { display: flex; flex-direction: column; gap: 25px; margin-bottom: 40px; }
 .info-card { background: var(--card-bg); padding: 25px; border-radius: 4px; border-top: 6px solid; text-align: center; }
@@ -75,13 +85,42 @@ h2 { font-size: clamp(1.6rem, 7vw, 2.5rem); color: var(--main-color); margin: 0;
 .icon-train { color: var(--train-color); font-size: 3rem; margin-bottom: 10px; }
 
 .link-button { display: block; padding: 14px; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; }
+
+/* --- 9. 掲示板セクション --- */
 .bbs-section { margin-top: 60px; } 
-.bbs-title { border-left: 6px solid var(--main-color); padding-left: 12px; font-size: 1.4rem; margin-bottom: 15px; color: var(--bbs-title-color); }
+.bbs-title { border-left: 6px solid var(--main-color); padding-left: 12px; font-size: 1.4rem; margin-bottom: 15px; color: var(--bbs-title-color); font-weight: bold; }
 .bbs-wrap { background: #fff; padding: 10px; border-radius: 4px; border: 1px solid #e0e0e0; min-height: 450px; margin-bottom: 20px; }
 
-.btn-contact { display: inline-flex; align-items: center; gap: 10px; padding: 14px 40px; background: #ffffff; color: #333; text-decoration: none; border: 2px solid #333; font-weight: bold; }
-footer { text-align: center; margin-top: 20px; }
-.hashtag-footer { color: var(--main-color); font-weight: bold; }
+/* --- 10. お問い合わせ（中央寄せ修正済み） --- */
+.contact-section { 
+    text-align: center; 
+    margin: 40px 0; 
+    padding-top: 20px; 
+    border-top: 1px solid rgba(150,150,150,0.1); 
+}
 
+.btn-contact { 
+    display: inline-flex;  /* 内容に合わせて幅を決める */
+    align-items: center; 
+    justify-content: center;
+    gap: 10px; 
+    padding: 14px 40px; 
+    background: #ffffff; 
+    color: #333; 
+    text-decoration: none; 
+    border: 2px solid #333; 
+    font-weight: bold;
+    transition: 0.3s;
+    margin: 0 auto;       /* 中央に配置 */
+}
+.btn-contact:hover { background: #f0f0f0; transform: translateY(-2px); }
+
+/* --- 11. フッター --- */
+footer { text-align: center; margin-top: 20px; }
+.hashtag-footer { color: var(--main-color); font-weight: bold; margin-bottom: 5px; }
+.footer-copy { font-size: 0.8rem; color: #777; }
+
+/* --- 12. モーダル --- */
 .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); }
 .modal-content { background: #fff; margin: 15% auto; padding: 30px; width: 90%; max-width: 500px; border-radius: 8px; text-align: center; color: #333; }
+.modal-name { font-weight: bold; font-size: 1.2rem; display: block; margin-bottom: 10px; }
