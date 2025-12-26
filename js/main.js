@@ -31,7 +31,7 @@ const VFU_THEMES = {
     }
 };
 
-let currentVfuMode = 'dark';
+let currentVfuMode = 'light';
 
 /**
  * テーマを適用する関数
