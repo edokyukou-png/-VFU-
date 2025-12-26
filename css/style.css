@@ -1,14 +1,14 @@
 /* =========================================
-   1. カラー変数の設定（Color Modeの心臓部）
+   1. カラー変数の定義
+   JSはこの「--container-bg」などの中身を書き換えて色を変えます
    ========================================= */
 :root {
-    /* ここにある値をJavaScriptが塗り替えることで、一瞬で色が変わります */
     --main-color: #4b2d71; 
-    --container-bg: rgba(250, 248, 252, 0.98); /* 背景色 */
-    --text-color: #222; /* 文字色 */
+    --container-bg: rgba(250, 248, 252, 0.98); 
+    --text-color: #222; 
     --car-color: #ae2631; 
     --train-color: #274a78;
-    --card-bg: rgba(255, 255, 255, 0.95); /* カードの背景 */
+    --card-bg: rgba(255, 255, 255, 0.95);
 }
 
 /* =========================================
@@ -16,56 +16,37 @@
    ========================================= */
 body {
     margin: 0;
-    padding: 0;
     font-family: 'Noto Serif JP', serif;
-    /* 【最重要】backgroundに !important を付け、JSの変更がデザイン崩れより優先されるようにします */
+    /* 【解説】!importantを付けることで、JSの命令を最優先にしています */
     background: var(--container-bg) !important;
     color: var(--text-color);
-    transition: background 0.3s ease, color 0.3s ease; /* 色変化を滑らかにする */
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* 中央の白い箱（コンテナ）の設定 */
+/* 【解説】中央のコンテンツエリア。既存のデザインを維持 */
 .container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 25px;
-    background: var(--container-bg); /* ここも背景色と連動 */
+    padding: 20px;
+    background: var(--container-bg);
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
 }
 
 /* =========================================
-   3. 各パーツのデザイン（既存を維持）
+   3. ヘッダーとバージョン表記
    ========================================= */
-
-/* 電光掲示板の枠 */
-.ticker-container {
-    background: #000;
-    color: #fff;
-    padding: 10px 0;
-    overflow: hidden;
-    margin-bottom: 20px;
+header {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-/* Color Modeボタンの見た目 */
-.mode-switch {
-    cursor: pointer;
-    background: rgba(0,0,0,0.1);
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 0.9rem;
+header h2 {
+    color: var(--main-color);
+    font-size: 2rem;
+    margin: 0;
 }
 
-/* 代表紹介ボタン */
-.intro-btn {
-    cursor: pointer;
-    background: #fff;
-    border: 1px solid #ccc;
-    padding: 8px 15px;
-    border-radius: 5px;
-}
-
-/* 公式ホームページの真下に置くバージョン表記専用スタイル */
+/* 【解説】公式ホームページの文字直下に置くバージョンの設定 */
 .version-tag-sub {
     font-size: 0.75rem;
     opacity: 0.6;
@@ -76,24 +57,40 @@ body {
     color: var(--text-color);
 }
 
-/* 掲示板タイトルの横線 */
+/* =========================================
+   4. Color Modeボタン（既存を微調整）
+   ========================================= */
+.mode-switch {
+    cursor: pointer;
+    padding: 8px 16px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* =========================================
+   5. 掲示板セクションのデザイン（既存維持）
+   ========================================= */
 .bbs-title {
     border-left: 6px solid var(--main-color);
-    padding-left: 12px;
-    margin-top: 40px;
+    padding-left: 15px;
+    margin: 40px 0 20px;
     font-size: 1.4rem;
 }
 
-/* 掲示板を包む白いエリア */
 .bbs-wrap {
     background: #fff; /* 掲示板の中身は読みやすさのため白固定 */
-    border: 1px solid #ddd;
+    border: 1px solid rgba(0,0,0,0.1);
     border-radius: 8px;
     padding: 10px;
     min-height: 400px;
 }
 
-/* その他、既存のデザイン（ボタンの色など）をここに記述してください */
-.btn-recruit { color: var(--main-color); border-color: var(--main-color); text-decoration: none; display: block; padding: 10px; border: 2px solid; border-radius: 5px; text-align: center; margin-bottom: 5px;}
-.btn-car { color: var(--car-color); border-color: var(--car-color); text-decoration: none; display: block; padding: 10px; border: 2px solid; border-radius: 5px; text-align: center; margin-bottom: 5px;}
-.btn-train { color: var(--train-color); border-color: var(--train-color); text-decoration: none; display: block; padding: 10px; border: 2px solid; border-radius: 5px; text-align: center; margin-bottom: 5px;}
+/* その他の既存クラス（.nav-buttons, .info-cardなど）は
+   あなたの元のstyle.cssの内容をそのままここに書き込んでください */
+.nav-buttons { display: flex; flex-direction: column; gap: 10px; }
+.bbs-announce { text-decoration: none; padding: 15px; border-radius: 5px; border: 2px solid; text-align: center; font-weight: bold; }
+.btn-recruit { color: var(--main-color); border-color: var(--main-color); }
+.btn-car { color: var(--car-color); border-color: var(--car-color); }
+.btn-train { color: var(--train-color); border-color: var(--train-color); }
