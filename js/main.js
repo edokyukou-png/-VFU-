@@ -1,13 +1,13 @@
 /**
- * VFU System v1.4.0 制御スクリプト
- * 役割：色の変更、電光掲示板、モーダルの管理
+ * VFU System v1.4.0 制御プログラム
+ * このファイルは、ボタンの動作や色の切り替えをすべて管理します。
  */
 
-// 【解説】それぞれのモードで「どの色に塗り替えるか」のリスト（レシピ）です
+// 【解説】カラーモードごとの「色の組み合わせ」レシピです
 const VFU_THEMES = {
     'light': {
         '--main-color': '#4b2d71',
-        '--container-bg': 'rgba(250, 248, 252, 0.98)', 
+        '--container-bg': 'rgba(250, 248, 252, 0.98)',
         '--text-color': '#222',
         '--card-bg': 'rgba(255, 255, 255, 0.95)'
     },
@@ -31,54 +31,60 @@ const VFU_THEMES = {
     }
 };
 
-let currentMode = 'light';
+let currentVfuMode = 'light';
 
 /**
- * 【解説】実際に色を塗り替える関数です
+ * 【解説】テーマを適用するメインの関数です
  */
-function applyTheme(mode) {
+function applyVfuTheme(mode) {
     const root = document.documentElement;
-    const colors = VFU_THEMES[mode];
+    const themeData = VFU_THEMES[mode];
+    if (!themeData) return;
 
-    // CSSの変数を1つずつ上書きします
-    Object.keys(colors).forEach(key => {
-        root.style.setProperty(key, colors[key]);
+    // 1. 各変数をCSSに流し込む
+    Object.keys(themeData).forEach(key => {
+        root.style.setProperty(key, themeData[key]);
     });
 
-    // 白に戻る際に、以前付いていた「ダーク用クラス」を消して確実にリセットします
+    // 2. 【重要】白に戻る際、過去のクラスを削除してリセットする
     if (mode === 'light') {
         document.body.classList.remove("dark-mode");
     } else {
         document.body.classList.add("dark-mode");
     }
-    currentMode = mode;
+
+    currentVfuMode = mode;
+    console.log(`v1.4.0: [${mode}] モード適用`);
 }
 
-// 【解説】ページが読み込まれたら実行する命令
+// 【解説】画面の読み込みが終わったら実行する命令
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. 最初は白モードに設定
-    applyTheme('light');
+    
+    // 最初は白(light)モードに設定
+    applyVfuTheme('light');
 
-    // 2. 電光掲示板のテキスト
+    // 1. 電光掲示板のテキスト設定
     const ticker = document.getElementById("ticker-text");
-    if (ticker) ticker.textContent = "ゲーム「Car Parking Multiplayer」クランメンバー募集中！";
+    if (ticker) ticker.textContent = "ゲーム「Car Parking Multiplayer」クランメンバー募集中！残り枠わずかです。";
 
-    // 3. モーダル（代表紹介）の制御
+    // 2. モーダル（代表紹介）の制御
     const modal = document.getElementById("introModal");
-    const openBtn = document.getElementById("introBtn");
+    const introBtn = document.getElementById("introBtn");
     const closeBtn = document.getElementById("closeModal");
-    if (openBtn) openBtn.onclick = () => modal.style.display = "block";
+
+    if (introBtn) introBtn.onclick = () => modal.style.display = "block";
     if (closeBtn) closeBtn.onclick = () => modal.style.display = "none";
+    // 画面のどこかをクリックしたら閉じる設定
     window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; };
 
-    // 4. カラーモードの切り替え（4段階ループ）
+    // 3. 【重要】カラーモードボタンの切り替え（4段階ループ）
     const modeBtn = document.getElementById("modeBtn");
     if (modeBtn) {
         modeBtn.onclick = () => {
-            if (currentMode === 'light') applyTheme('dark');
-            else if (currentMode === 'dark') applyTheme('car');
-            else if (currentMode === 'car') applyTheme('train');
-            else applyTheme('light'); // ここで白(light)に戻ります
+            if (currentVfuMode === 'light') applyVfuTheme('dark');
+            else if (currentVfuMode === 'dark') applyVfuTheme('car');
+            else if (currentVfuMode === 'car') applyVfuTheme('train');
+            else applyVfuTheme('light'); // 最後に白に戻る
         };
     }
 });
