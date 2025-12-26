@@ -82,5 +82,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 3. ダークモード
     const mode = document.getElementById("modeBtn");
-    if (mode) mode.onclick = () => document.body.classList.toggle("dark-mode");
+if (mode) {
+    mode.onclick = () => {
+        if (currentVfuMode === 'dark') applyVfuTheme('car');
+        else if (currentVfuMode === 'car') applyVfuTheme('train');
+        else applyVfuTheme('dark');
+    };
+};
 });
