@@ -202,6 +202,20 @@
 </div>
     
 <script src="js/main.js"></script>
+    <script>
+    window.onload = function() {
+        // ページが読み込まれたら、すべての掲示板を一度だけリフレッシュする
+        const iframes = document.querySelectorAll('iframe');
+        iframes.forEach(iframe => {
+            const src = iframe.src;
+            iframe.src = ''; 
+            setTimeout(() => {
+                iframe.src = src;
+            }, 500); // 0.5秒後に再接続
+        });
+    };
+</script>
+
 
 </body>
 </html>
