@@ -140,10 +140,28 @@
     }
   }
   // 画面が表示されたら実行
-  window.addEventListener('DOMContentLoaded', renderCusdisBBS);
+    <script async src="https://cusdis.com/js/cusdis.es.js"></script>
+<script>
+  // Cusdisの自動読み込みを上書きして、3つ強制的に表示させる
+  window.renderCusdisBBS = function() {
+    if (window.Cusdis && typeof window.Cusdis.render === 'function') {
+      const targets = ['recruit', 'car', 'train'];
+      targets.forEach(function(name) {
+        const el = document.getElementById('cusdis_thread_' + name);
+        if (el) {
+          window.Cusdis.render(el);
+        }
+      });
+    } else {
+      setTimeout(window.renderCusdisBBS, 500);
+    }
+  };
+
+  // ページ読み込み完了時、および少し遅らせて実行（確実性を高めるため）
+  window.addEventListener('load', window.renderCusdisBBS);
+  setTimeout(window.renderCusdisBBS, 1500); 
 </script>
 <script src="js/main.js"></script>
-
 
 </body>
 </html>
