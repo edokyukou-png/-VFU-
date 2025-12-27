@@ -62,42 +62,35 @@
                     <a href="https://line.me/ti/g2/KSS7B2ene7TeqqOIaKvDxjq-keGQNRmMSuRV8g" class="link-button" style="background:var(--train-color)">LINE OpenChat</a>
                 </div>
             </div>
-            <div class="bbs-section" id="bbs-recruit">
-    <h3 class="bbs-title">クランメンバー募集掲示板</h3>
-    <div class="bbs-wrap">
-        <div id="cusdis_thread_recruit"
-            data-host="https://cusdis.com"
-            data-app-id="b0e9d6b9-d09c-445f-a3ba-7a9aa4304f69"
-            data-page-id="recruit_bbs"
-            data-page-url="https://vfu-official.github.io/#bbs-recruit"
-            data-page-title="クランメンバー募集掲示板">
-        </div>
-    </div>
+            <div class="bbs-wrap">
+  <div id="cusdis_thread_recruit"
+    data-host="https://cusdis.com"
+    data-app-id="b0e9d6b9-d09c-445f-a3ba-7a9aa4304f69"
+    data-page-id="recruit_bbs"
+    data-page-url="https://vfu-official.github.io/#bbs-recruit"
+    data-page-title="クランメンバー募集掲示板">
+  </div>
 </div>
-<div class="bbs-section" id="bbs-car">
-    <h3 class="bbs-title">車部掲示板</h3>
-    <div class="bbs-wrap">
-        <div id="cusdis_thread_car"
-            data-host="https://cusdis.com"
-            data-app-id="b0e9d6b9-d09c-445f-a3ba-7a9aa4304f69"
-            data-page-id="car_bbs"
-            data-page-url="https://vfu-official.github.io/#bbs-car"
-            data-page-title="車部掲示板">
-        </div>
-    </div>
+<div class="bbs-wrap">
+  <div id="cusdis_thread_car"
+    data-host="https://cusdis.com"
+    data-app-id="b0e9d6b9-d09c-445f-a3ba-7a9aa4304f69"
+    data-page-id="car_bbs"
+    data-page-url="https://vfu-official.github.io/#bbs-car"
+    data-page-title="車部掲示板">
+  </div>
 </div>
-<div class="bbs-section" id="bbs-train">
-    <h3 class="bbs-title">鉄道部掲示板</h3>
-    <div class="bbs-wrap">
-        <div id="cusdis_thread_train"
-            data-host="https://cusdis.com"
-            data-app-id="b0e9d6b9-d09c-445f-a3ba-7a9aa4304f69"
-            data-page-id="train_bbs"
-            data-page-url="https://vfu-official.github.io/#bbs-train"
-            data-page-title="鉄道部掲示板">
-        </div>
-    </div>
+<div class="bbs-wrap">
+  <div id="cusdis_thread_train"
+    data-host="https://cusdis.com"
+    data-app-id="b0e9d6b9-d09c-445f-a3ba-7a9aa4304f69"
+    data-page-id="train_bbs"
+    data-page-url="https://vfu-official.github.io/#bbs-train"
+    data-page-title="鉄道部掲示板">
+  </div>
 </div>
+
+       
 
 　　　　　　　
             
@@ -126,7 +119,16 @@
 </div>
     
 
-<script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+<script defer src="https://cusdis.com/js/cusdis.es.js"></script>
+<script>
+  window.onload = function() {
+    if (window.Cusdis) {
+      window.Cusdis.render(document.getElementById('cusdis_thread_recruit'));
+      window.Cusdis.render(document.getElementById('cusdis_thread_car'));
+      window.Cusdis.render(document.getElementById('cusdis_thread_train'));
+    }
+  }
+</script>
 <script src="js/main.js"></script>
 </body>
 </html>
