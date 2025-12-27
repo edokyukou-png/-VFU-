@@ -100,10 +100,6 @@
         </div>
     </div>
 </div>
-
-       
-
-　　　　　　　
             
 
             <div class="contact-section">
@@ -130,19 +126,24 @@
 </div>
     
     
-
 <script async src="https://cusdis.com/js/cusdis.es.js"></script>
 <script>
-  // ページ読み込み完了後に3つの掲示板を強制的に描画
-  window.addEventListener('load', function() {
+  function renderCusdisBBS() {
     if (window.Cusdis && typeof window.Cusdis.render === 'function') {
+      // 3つのIDをそれぞれ個別に読み込ませる
       window.Cusdis.render(document.getElementById('cusdis_thread_recruit'));
       window.Cusdis.render(document.getElementById('cusdis_thread_car'));
       window.Cusdis.render(document.getElementById('cusdis_thread_train'));
+    } else {
+      // 読み込みが間に合わなかった場合、少し待って再実行
+      setTimeout(renderCusdisBBS, 500);
     }
-  });
+  }
+  // 画面が表示されたら実行
+  window.addEventListener('DOMContentLoaded', renderCusdisBBS);
 </script>
 <script src="js/main.js"></script>
+
 
 </body>
 </html>
