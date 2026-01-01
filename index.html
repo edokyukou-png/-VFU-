@@ -220,6 +220,21 @@
         });
     };
 </script>
+    <script>
+function reloadBBS(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+
+    const iframe = section.querySelector("iframe");
+    if (!iframe) return;
+
+    const src = iframe.src;
+    iframe.src = "";
+    setTimeout(() => {
+        iframe.src = src;
+    }, 300);
+}
+</script>
 
 
 </body>
