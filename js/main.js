@@ -32,3 +32,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const mode = document.getElementById("modeBtn");
     if (mode) mode.onclick = () => document.body.classList.toggle("dark-mode");
 });
+<script>
+function reloadBBS(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+
+    const iframe = section.querySelector("iframe");
+    if (!iframe) return;
+
+    const src = iframe.src;
+    iframe.src = "";
+    setTimeout(() => {
+        iframe.src = src;
+    }, 300);
+}
+</script>
